@@ -175,11 +175,10 @@ import { getTableList } from '@/api'
 import excel from '@/utils/excel'
 import Pagination from '@/components/Pagination'
 import Upload from '@/components/Upload'
-import Hints from '@/components/Hints'
 
 export default {
   name: 'Table',
-  components: { Pagination, Upload, Hints },
+  components: { Pagination, Upload },
   data() {
     return {
       // 数据列表加载动画

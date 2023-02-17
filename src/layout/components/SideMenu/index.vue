@@ -30,6 +30,7 @@ export default {
   computed: {
     ...mapGetters('app', ['collapsed']),
     routes() {
+      // 导航栏以及路由信息
       return this.$router.options.routes
     },
     activeMenu() {

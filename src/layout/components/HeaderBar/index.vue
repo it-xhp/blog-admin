@@ -2,8 +2,7 @@
   <div class="header-bar clear-fix">
     <FoldSideMenu />
     <BreadCrumbs />
-    <div class="header-right clear-fix">
-      <LangSelect />
+    <div class="header-right clear-fix" style="display: flex;justify-content: end">
       <GitHubLink />
       <UserAvatar />
     </div>
@@ -13,7 +12,6 @@
 <script>
 import FoldSideMenu from '@/components/FoldSideMenu'
 import BreadCrumbs from '@/components/BreadCrumbs'
-import LangSelect from '@/components/LangSelect'
 import GitHubLink from '@/components/GitHubLink'
 import UserAvatar from '@/components/UserAvatar'
 
@@ -21,7 +19,6 @@ export default {
   components: {
     FoldSideMenu,
     BreadCrumbs,
-    LangSelect,
     GitHubLink,
     UserAvatar
   }

@@ -16,7 +16,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/form-table/table-classic',
     meta: {
-      title: '表格&表单',
+      title: '文章管理',
       icon: 'vue-dsn-icon-biaoge'
     },
     children: [
@@ -25,7 +25,7 @@ export const asyncRoutes = [
         name: 'TableClassic',
         component: () => import('../views/form-table/TableClassic'),
         meta: {
-          title: '综合表格'
+          title: '所有文章'
         }
       },
       {

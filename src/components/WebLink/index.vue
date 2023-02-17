@@ -1,8 +1,8 @@
 <template>
   <div class="github-link-wrapper">
-    <el-tooltip effect="dark" content="GitHub链接" placement="bottom">
-      <a href="https://github.com/baimingxuan/vue-admin-design.git" target="_blank" rel="noopener">
-        <i class="icon vue-dsn-icon-git" />
+    <el-tooltip effect="dark" content="网站前台" placement="bottom">
+      <a href="http://116.63.161.202/" target="_self" rel="noopener">
+        <i class="blog-web" style="font-size: 30px" />
       </a>
     </el-tooltip>
   </div>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'GitHubLink'
+  name: 'WebLink'
 }
 </script>
 

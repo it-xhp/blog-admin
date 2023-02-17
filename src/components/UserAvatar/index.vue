@@ -12,14 +12,13 @@
 </template>
 
 <script>
-import Avatar from '../../assets/img/avatar.png'
 import { removeToken } from '@/utils/cookie'
 
 export default {
   name: 'UserAvatar',
   data() {
     return {
-      avatarSrc: Avatar
+      avatarSrc: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
     }
   },
   methods: {

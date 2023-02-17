@@ -3,7 +3,7 @@
     <FoldSideMenu />
     <BreadCrumbs />
     <div class="header-right clear-fix" style="display: flex;justify-content: end">
-      <GitHubLink />
+      <WebLink />
       <UserAvatar />
     </div>
   </div>
@@ -12,14 +12,14 @@
 <script>
 import FoldSideMenu from '@/components/FoldSideMenu'
 import BreadCrumbs from '@/components/BreadCrumbs'
-import GitHubLink from '@/components/GitHubLink'
+import WebLink from '@/components/WebLink'
 import UserAvatar from '@/components/UserAvatar'
 
 export default {
   components: {
     FoldSideMenu,
     BreadCrumbs,
-    GitHubLink,
+    WebLink,
     UserAvatar
   }
 }

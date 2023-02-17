@@ -1,11 +1,18 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3901184 */
-  src: url('iconfont.eot?t=1676604860770'); /* IE9 */
-  src: url('iconfont.eot?t=1676604860770#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('iconfont.woff2?t=1676604860770') format('woff2'),
-       url('iconfont.woff?t=1676604860770') format('woff'),
-       url('iconfont.ttf?t=1676604860770') format('truetype'),
-       url('iconfont.svg?t=1676604860770#iconfont') format('svg');
+  src: url('iconfont.eot?t=1676618737330'); /* IE9 */
+  src: url('iconfont.eot?t=1676618737330#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('iconfont.woff2?t=1676618737330') format('woff2'),
+       url('iconfont.woff?t=1676618737330') format('woff'),
+       url('iconfont.ttf?t=1676618737330') format('truetype'),
+       url('iconfont.svg?t=1676618737330#iconfont') format('svg');
+}
+[class^="blog"], [class*=" blog"] {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .iconfont {
@@ -16,12 +23,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-[class^="blog"], [class*=" blog"] {
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+.blog-web:before {
+  content: "\e6e9";
 }
 
 .blog-fenlei:before {

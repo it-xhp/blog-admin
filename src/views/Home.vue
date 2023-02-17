@@ -19,30 +19,14 @@
           <ChartsPie :title="text" type="pie" :data="chartsPieData" class="data-desc" />
         </el-card>
       </el-col>
-      <el-col :span="8">
-        <el-card shadow="always" :body-style="{padding: '0px'}">
-          <div class="data-desc data-lang-box">
-            <div class="data-lang-title">项目语言构成</div>
-            <div v-for="(item, index) in langsData" :key="index" class="data-lang-item">
-              <label>{{ item.name }}</label>
-              <el-progress :percentage="item.value" :stroke-width="16" :color="item.color" />
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="8">
-        <el-card shadow="always" :body-style="{padding: '0px'}">
-          <ChartsPie :title="text" type="ring" :data="chartsPieData" class="data-desc" />
-        </el-card>
-      </el-col>
-    </el-row>
-    <el-row class="date-box" :gutter="20">
-      <el-col :span="12">
+      <el-col :span="16">
         <el-card shadow="always" :body-style="{padding: '0px'}">
           <ChartsBar :title="title" :data="commonChartsData" class="data-chart" />
         </el-card>
       </el-col>
-      <el-col :span="12">
+    </el-row>
+    <el-row class="date-box">
+      <el-col :span="24">
         <el-card shadow="always" :body-style="{padding: '0px'}">
           <ChartsLine :title="title" :data="commonChartsData" class="data-chart" />
         </el-card>
@@ -61,21 +45,13 @@ export default {
   components: { CountTo, ChartsPie, ChartsBar, ChartsLine },
   data() {
     return {
-      text: '用户访问来源',
+      text: '分类',
       title: '近七天用户访问量条形图',
-      langsData: [
-        { name: 'VUE', value: 45, color: '#2d8cf0' },
-        { name: 'ES6', value: 32, color: '#19be6b' },
-        { name: 'TS', value: 4, color: '#ff9900' },
-        { name: 'LESS', value: 13, color: '#e46cbb' },
-        { name: 'HTML', value: 6, color: '#9a66e4' }
-      ],
       cardInfoData: [
-        { title: '今日点击', icon: 'vue-dsn-icon-dianji', count: 682, color: '#2d8cf0' },
-        { title: '新增用户', icon: 'vue-dsn-icon-xinzeng', count: 259, color: '#19be6b' },
-        { title: '信息发送', icon: 'vue-dsn-icon-xinfeng', count: 1262, color: '#ff9900' },
-        { title: '点赞统计', icon: 'vue-dsn-icon-dianzan', count: 508, color: '#e46cbb' },
-        { title: '累计收藏', icon: 'vue-dsn-icon-heart', count: 379, color: '#9a66e4' }
+        { title: '访问量', icon: 'blog-liulanliang', count: 682, color: '#2d8cf0' },
+        { title: '文章', icon: 'blog-wenzhang', count: 259, color: '#19be6b' },
+        { title: '标签', icon: 'blog-biaoqian', count: 1262, color: '#ff9900' },
+        { title: '分类', icon: 'blog-fenlei', count: 508, color: '#e46cbb' }
       ],
       chartsPieData: [
         { value: 1920, name: '直接访问' },

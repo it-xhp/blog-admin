@@ -30,7 +30,6 @@ export default {
           timeDivider: true, // 当前时间和持续时间的分隔符
           durationDisplay: true, // 显示持续时间
           remainingTimeDisplay: false, // 是否显示剩余时间功能
-          fullscreenToggle: true // 是否显示全屏按钮
         }
       }
     }

@@ -85,7 +85,7 @@ export default {
             name: '直接访问',
             // 类型配置
             type: 'bar',
-            barWidth: '40%',
+            barWidth: '30%',
             // 数据配置
             data: seriesData,
             itemStyle: {

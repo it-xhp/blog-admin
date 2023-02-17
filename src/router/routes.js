@@ -47,6 +47,40 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/classify',
+    name: 'Classify',
+    component: Layout,
+    children: [
+      {
+        path: 'classify-table',
+        name: 'ClassifyTable',
+        component: () => import('../views/classify/classifyTable'),
+        meta: {
+          title: '分类目录',
+          icon: 'vue-dsn-icon-excel',
+          fixed: true
+        }
+      }
+    ]
+  },
+  {
+    path: '/tags',
+    name: 'Tags',
+    component: Layout,
+    children: [
+      {
+        path: 'tags-table',
+        name: 'TagsTable',
+        component: () => import('../views/tags/tagsTable'),
+        meta: {
+          title: '标签管理',
+          icon: 'vue-dsn-icon-excel',
+          fixed: true
+        }
+      }
+    ]
+  },
+  {
     path: '/image',
     name: 'Image',
     component: Layout,
@@ -83,29 +117,29 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/video',
-    name: 'Video',
+    path: '/logs',
+    name: 'Logs',
     component: Layout,
-    redirect: '/video/video-player',
+    redirect: '/logs/login-logs',
     meta: {
-      title: '视频处理',
+      title: '日志管理',
       icon: 'vue-dsn-icon-video'
     },
     children: [
       {
-        path: 'video-player',
+        path: 'logs-player',
         name: 'VideoPlayer',
-        component: () => import('../views/video/VideoPlayer'),
+        component: () => import('../views/logs/LoginLogs'),
         meta: {
-          title: '视频播放器'
+          title: '登录日志'
         }
       },
       {
-        path: 'video-mark',
+        path: 'logs-mark',
         name: 'VideoMark',
-        component: () => import('../views/video/VideoMark'),
+        component: () => import('../views/logs/OperationalLogs'),
         meta: {
-          title: '视频水印'
+          title: '操作日志'
         }
       }
     ]

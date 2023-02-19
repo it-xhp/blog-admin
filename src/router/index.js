@@ -37,7 +37,7 @@ export const constantRoutes = [
     meta: { title: '404' }
   },
   {
-    path: '/',
+    path: '/', // 有点bug  有两个'/'
     name: 'Layout',
     component: Layout,
     redirect: '/home',

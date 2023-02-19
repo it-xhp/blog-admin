@@ -14,6 +14,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI from 'element-ui'
 Vue.use(ElementUI, { size: 'small' })
 
+// 导入md5.js
+import MD5 from 'js-md5'
+// 将md5转换成vue原型：
+Vue.prototype.md5 = MD5
+
 Vue.config.productionTip = false
 
 new Vue({

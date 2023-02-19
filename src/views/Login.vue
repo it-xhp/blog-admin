@@ -37,8 +37,8 @@ export default {
     return {
       Background,
       loginForm: {
-        username: 'admin',
-        password: 'admin123',
+        username: 'root',
+        password: '123456',
         rememberMe: true
       },
       loginRules: {
@@ -60,9 +60,10 @@ export default {
   methods: {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
+        const md5Password = this.md5(this.loginForm.password)
         const data = {
           username: this.loginForm.username,
-          password: this.loginForm.password
+          password: md5Password
         }
         if (valid) {
           this.loading = true

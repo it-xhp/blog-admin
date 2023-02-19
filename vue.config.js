@@ -14,12 +14,16 @@ const cdn = {
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
+// 接口地址，注意协议，如果你没有配置 ssl，需要将 https 改为 http
+const VUE_APP_BASE_API = 'http://127.0.0.1:8088'
+// 如果接口是 http 形式， wss 需要改为 ws
+// eslint-disable-next-line no-unused-vars
+const VUE_APP_WS_API = 'ws://42.194.194.178:3000'
 
 module.exports = {
   publicPath: './', // 部署应用包时的基本 url
   outputDir: 'dist', // build 构建文件目录
   assetsDir: 'static', // 静态资源目录
-  lintOnSave: process.env.NODE_ENV === 'development', // 仅在开发模式下进行 eslint 检测代码
   productionSourceMap: false, // 禁用生产环境的 source map
   runtimeCompiler: true, // 是否运行时组件中使用 template
   devServer: {
@@ -31,11 +35,11 @@ module.exports = {
       errors: true
     },
     proxy: {
-      '/': { // 被代理的接口名
-        target: process.env.VUE_APP_BASE_API, // url地址
+      '/api': { // 被代理的接口名
+        target: VUE_APP_BASE_API, // url地址
         changeOrigin: true, // 发送请求头中 host 是否设置成 target
-        pathRewrite: { // 重定向
-          '^/': ''
+        pathRewrite: {
+          '^/api/': '' // 将访问路径的/api/替换成’‘，后台服务不用加api了,但前端的请求地址还是要加/api/
         }
       }
     }

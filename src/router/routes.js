@@ -33,7 +33,7 @@ export const asyncRoutes = [
         name: 'FormList',
         component: () => import('../views/form-table/FormList'),
         meta: {
-          title: '表单列表'
+          title: '写文章'
         }
       },
       {
@@ -81,6 +81,62 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/logs',
+    name: 'Logs',
+    component: Layout,
+    redirect: '/logs/login-logs',
+    meta: {
+      title: '日志管理',
+      icon: 'vue-dsn-icon-video'
+    },
+    children: [
+      {
+        path: 'logs-player',
+        name: 'VideoPlayer',
+        component: () => import('../views/logs/LoginLogs'),
+        meta: {
+          title: '登录日志'
+        }
+      },
+      {
+        path: 'logs-mark',
+        name: 'VideoMark',
+        component: () => import('../views/logs/OperationalLogs'),
+        meta: {
+          title: '操作日志'
+        }
+      }
+    ]
+  },
+  {
+    path: '/systemSettings',
+    name: 'User',
+    component: Layout,
+    redirect: '/logs/login-logs',
+    meta: {
+      title: '系统设置',
+      icon: 'vue-dsn-icon-video'
+    },
+    children: [
+      {
+        path: 'systemSettings-current',
+        name: 'CurrentUser',
+        component: () => import('../views/systemSettings/CurrentUser'),
+        meta: {
+          title: '个人资料'
+        }
+      },
+      {
+        path: 'system-settings-user-manager',
+        name: 'UserManager',
+        component: () => import('../views/systemSettings/UserManager'),
+        meta: {
+          title: '用户管理'
+        }
+      }
+    ]
+  },
+  {
     path: '/image',
     name: 'Image',
     component: Layout,
@@ -112,34 +168,6 @@ export const asyncRoutes = [
         component: () => import('../views/image/ImageSynthesizer'),
         meta: {
           title: '图片合成'
-        }
-      }
-    ]
-  },
-  {
-    path: '/logs',
-    name: 'Logs',
-    component: Layout,
-    redirect: '/logs/login-logs',
-    meta: {
-      title: '日志管理',
-      icon: 'vue-dsn-icon-video'
-    },
-    children: [
-      {
-        path: 'logs-player',
-        name: 'VideoPlayer',
-        component: () => import('../views/logs/LoginLogs'),
-        meta: {
-          title: '登录日志'
-        }
-      },
-      {
-        path: 'logs-mark',
-        name: 'VideoMark',
-        component: () => import('../views/logs/OperationalLogs'),
-        meta: {
-          title: '操作日志'
         }
       }
     ]

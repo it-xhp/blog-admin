@@ -5,7 +5,7 @@
       <i class="el-icon-caret-bottom" />
     </div>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item command="userCenter">个人中心</el-dropdown-item>
+      <el-dropdown-item command="userCenter">个人资料</el-dropdown-item>
       <el-dropdown-item command="loginOut">退出登录</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
@@ -24,7 +24,7 @@ export default {
   methods: {
     handleCommand(command) {
       if (command === 'userCenter') {
-        this.$router.push({ path: '/user-center' })
+        this.$router.push({ path: '/systemSettings-center' })
       }
       if (command === 'loginOut') {
         this.loginOut()

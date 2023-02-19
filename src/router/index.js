@@ -56,7 +56,7 @@ export const constantRoutes = [
     path: '/',
     name: 'Layout',
     component: Layout,
-    redirect: '/user-center',
+    redirect: '/systemSettings-center',
     hidden: true,
     children: [{
       path: 'user-center',

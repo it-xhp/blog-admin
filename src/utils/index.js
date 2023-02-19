@@ -1,13 +1,4 @@
 /**
- * 对象深拷贝
- * @param {Object} source
- * @returns {Object}
- */
-export function deepClone(source) {
-  return JSON.parse(JSON.stringify(source))
-}
-
-/**
  * 获取粘贴时的纯文本
  * @param e
  * @returns {string}

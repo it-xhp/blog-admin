@@ -26,6 +26,7 @@ module.exports = {
   assetsDir: 'static', // 静态资源目录
   productionSourceMap: false, // 禁用生产环境的 source map
   runtimeCompiler: true, // 是否运行时组件中使用 template
+  lintOnSave: false,
   devServer: {
     host: '0.0.0.0', // 默认是 localhost,可不配置
     port: 8000, // 配置端口号

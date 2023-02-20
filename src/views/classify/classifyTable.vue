@@ -4,34 +4,24 @@
       <!-- 操作栏 -->
       <div class="control-btns">
         <el-button type="primary" @click="handleCreate">新建数据</el-button>
-        <el-button type="primary" @click="handleImport">导入数据</el-button>
-        <el-button type="primary" @click="exportVisible = true">导出数据</el-button>
         <el-button type="danger" @click="batchDelete">批量删除</el-button>
       </div>
       <!-- 查询栏 -->
       <el-form
-        ref="searchForm"
+        ref="listQuery"
         :inline="true"
         :model="listQuery"
         label-width="90px"
         class="search-form"
       >
-        <el-form-item label="编号">
-          <el-input v-model="listQuery.id" placeholder="编号" />
-        </el-form-item>
-        <el-form-item label="手机">
-          <el-input v-model="listQuery.phone" placeholder="手机" />
-        </el-form-item>
-        <el-form-item label="婚姻状况">
-          <el-select v-model="listQuery.married" placeholder="婚姻状况">
-            <el-option :value="0" label="单身" />
-            <el-option :value="1" label="未婚" />
-            <el-option :value="2" label="已婚" />
-            <el-option :value="3" label="离异" />
-          </el-select>
+        <el-form-item label="分类名" prop="name">
+          <el-input v-model="listQuery.name" placeholder="分类名" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
+        </el-form-item>
+        <el-form-item>
+          <el-button @click="resetForm('listQuery')">重置</el-button>
         </el-form-item>
       </el-form>
       <!-- 表格栏 -->
@@ -45,7 +35,6 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="60" />
-        <el-table-column prop="id" label="编号" align="center" width="120" sortable />
         <el-table-column prop="name" label="姓名" align="center">
           <template slot-scope="scope">
             <el-popover trigger="hover" placement="top">
@@ -135,59 +124,24 @@
           </div>
         </el-form>
       </el-dialog>
-      <!-- 导入数据 弹出栏 -->
-      <el-dialog
-        title="导入数据"
-        :visible.sync="importVisible"
-        width="20%"
-      >
-        <div class="upload-box">
-          <span>选择文件：</span>
-          <Upload :files-format="filesFormat">
-            <i class="vue-dsn-icon-upload" />上传文件
-          </Upload>
-        </div>
-        <div class="hints">TIP：请选择要导出数据的格式。</div>
-        <span slot="footer">
-          <el-button @click="cancleImport">取 消</el-button>
-          <el-button type="primary" @click="confirmImport">确 定</el-button>
-        </span>
-      </el-dialog>
-      <!-- 导出数据 弹出栏 -->
-      <el-dialog
-        title="导出数据"
-        :visible.sync="exportVisible"
-        width="30%"
-      >
-        <div class="export-data">
-          <el-button type="primary" @click="exportTable('xlsx')">EXCEL格式</el-button>
-          <el-button type="primary" @click="exportTable('csv')">CSV格式</el-button>
-          <el-button type="primary" @click="exportTable('txt')">TXT格式</el-button>
-        </div>
-        <div class="hints">TIP：请选择要导出数据的格式。</div>
-      </el-dialog>
     </el-card>
   </div>
 </template>
 
 <script>
-import { getTableList } from '@/api'
-import excel from '@/utils/excel'
+import classifyTable from '@/api/classify/classifyTable'
 import Pagination from '@/components/Pagination'
-import Upload from '@/components/Upload'
 
 export default {
   name: 'ClassifyTable',
-  components: { Pagination, Upload },
+  components: { Pagination },
   data() {
     return {
       // 数据列表加载动画
       listLoading: true,
       // 查询列表参数对象
       listQuery: {
-        id: undefined,
-        phone: undefined,
-        married: undefined,
+        name: undefined,
         currentPage: 1,
         pageSize: 10
       },
@@ -217,13 +171,7 @@ export default {
         ]
       },
       // 防止多次连续提交表单
-      isSubmit: false,
-      // 导入数据 弹出框显示/隐藏
-      importVisible: false,
-      // 导出文件格式
-      filesFormat: '.txt, .csv, .xls, .xlsx',
-      // 导出数据 弹出框显示/隐藏
-      exportVisible: false
+      isSubmit: false
     }
   },
   created() {
@@ -292,13 +240,12 @@ export default {
     fetchData() {
       this.listLoading = true
       // 获取数据列表接口
-      getTableList(this.listQuery).then(res => {
-        const data = res.data
-        if (data.code === 0) {
-          this.total = data.data.total
-          this.tableData = data.data.list
-          this.listLoading = false
-        }
+      const data = JSON.stringify(this.listQuery)
+      classifyTable.loadTable(data).then(res => {
+        const data = res
+        this.total = data.total
+        this.tableData = data.categoriesList
+        this.listLoading = false
       }).catch(() => {
         this.listLoading = false
       })
@@ -308,9 +255,9 @@ export default {
       this.listQuery.currentPage = 1
       this.fetchData()
     },
-    // 导入数据
-    handleImport() {
-      this.importVisible = true
+    // 重置
+    resetForm(formName) {
+      this.$refs[formName].resetFields()
     },
     // 新增/编辑表单确认提交
     submitForm(formName) {
@@ -329,31 +276,6 @@ export default {
     cancleForm() {
       this.$refs.dialogForm.resetFields()
       this.formVisible = false
-    },
-    // 导入数据弹出栏 确认操作
-    confirmImport() {
-      // 此处添加 后台接收的接口，将导入的数据传给后台处理
-      this.importVisible = false
-    },
-    // 导入数据弹出栏 取消操作
-    cancleImport() {
-      // 将导入的数据清空
-      this.importVisible = false
-    },
-    // 导出数据--excle格式
-    exportTable(type) {
-      if (this.tableData.length) {
-        const params = {
-          header: ['编号', '姓名', '性别', '手机', '学历', '婚姻状况', '禁止编辑', '爱好'],
-          key: ['id', 'name', 'sex', 'phone', 'education', 'married', 'forbid', 'hobby'],
-          data: this.tableData,
-          autoWidth: true,
-          fileName: '综合表格',
-          bookType: type
-        }
-        excel.exportDataToExcel(params)
-        this.exportVisible = false
-      }
     },
     // 列表中婚姻状况栏，状态值改变时，调用
     selectChange(row) {

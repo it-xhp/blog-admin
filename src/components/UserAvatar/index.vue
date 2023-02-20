@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import { removeToken } from '@/utils/cookie'
+import storage from '@/utils/storage'
+import { logout } from '../../api/layout/UserAvatar'
 
 export default {
   name: 'UserAvatar',
@@ -24,7 +25,7 @@ export default {
   methods: {
     handleCommand(command) {
       if (command === 'userCenter') {
-        this.$router.push({ path: '/systemSettings-center' })
+        this.$router.push({ path: '/systemSettings/systemSettings-current' })
       }
       if (command === 'loginOut') {
         this.loginOut()
@@ -36,8 +37,12 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        removeToken()
-        location.reload()
+        storage.remove('user')
+        storage.removeToken()
+        logout().then(() => {
+          this.$router.push({ path: '/login' })
+        })
+        // location.reload()
       })
     }
   }

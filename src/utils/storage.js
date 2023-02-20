@@ -1,17 +1,27 @@
+const TokenKey = 'token'
 export default {
-  saveSessionString(key, value) {
-    window.sessionStorage.setItem(key, value)
+  saveLocalString(key, value) {
+    window.localStorage.setItem(key, value)
   },
   getSelectionString(key) {
-    return window.sessionStorage.getItem(key)
+    return window.localStorage.getItem(key)
   },
-  saveSessionObject(key, value) {
-    window.sessionStorage.setItem(key, JSON.stringify(value))
+  saveLocalObject(key, value) {
+    window.localStorage.setItem(key, JSON.stringify(value))
   },
-  getSessionObject(key) {
-    return JSON.parse(window.sessionStorage.getItem(key))
+  getLocalObject(key) {
+    return JSON.parse(window.localStorage.getItem(key))
   },
   remove(key) {
-    return window.sessionStorage.removeItem(key)
+    return window.localStorage.removeItem(key)
+  },
+  removeToken() {
+    window.localStorage.removeItem(TokenKey)
+  },
+  saveToken(value) {
+    window.localStorage.setItem(TokenKey, value)
+  },
+  getToken() {
+    return window.localStorage.getItem(TokenKey)
   }
 }

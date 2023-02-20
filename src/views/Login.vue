@@ -28,7 +28,7 @@
 
 <script>
 import { login } from '@/api/login'
-import { setToken } from '@/utils/cookie'
+import storage from '../utils/storage'
 import Background from '../assets/img/login-background.jpg'
 
 export default {
@@ -70,8 +70,14 @@ export default {
           this.loading = true
           login(data).then(res => {
             this.loading = false
-            setToken(res.token)
-            this.$router.push({ path: this.redirect || '/' })
+            if (res != null) {
+              storage.saveLocalObject('user', res.user)
+              console.log(res.token)
+              if (res.token !== null) {
+                storage.saveToken(res.token)
+              }
+              this.$router.push({ path: this.redirect || '/' })
+            }
           }).catch(() => {
             this.loading = false
           })

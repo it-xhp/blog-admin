@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import { getToken } from './utils/cookie'
-
+import router from '@/router'
 // 创建axios实例
 const service = axios.create({
   baseURL: '/api', // api 的 base_url
@@ -30,6 +30,9 @@ service.interceptors.response.use(
     const code = data.errorCode
     const message = data.message
     if (code === 0) {
+      return data.data
+    } else if (code === 50012) {
+      router.push('/login')
       return data.data
     } else {
       Message({

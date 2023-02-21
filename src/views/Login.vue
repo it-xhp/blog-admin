@@ -72,7 +72,6 @@ export default {
             this.loading = false
             if (res != null) {
               storage.saveLocalObject('user', res.user)
-              console.log(res.token)
               if (res.token !== null) {
                 storage.saveToken(res.token)
               }

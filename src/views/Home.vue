@@ -40,7 +40,7 @@ import CountTo from 'vue-count-to'
 import ChartsPie from '@/components/Charts/ChartsPie'
 import ChartsBar from '@/components/Charts/ChartsBar'
 import ChartsLine from '@/components/Charts/ChartsLine'
-import { getPostCount } from '@/api/home'
+import { getPostCount, getTagCount, getCategoryCount } from '@/api/home'
 export default {
   name: 'Home',
   components: { CountTo, ChartsPie, ChartsBar, ChartsLine },
@@ -76,11 +76,23 @@ export default {
   },
   mounted() {
     this.getPostCount()
+    this.getTagCount()
+    this.getCategoryCount()
   },
   methods: {
     getPostCount() {
       getPostCount().then(res => {
         this.cardInfoData[1].count = res.postCount
+      })
+    },
+    getTagCount() {
+      getTagCount().then(res => {
+        this.cardInfoData[2].count = res.tagCount
+      })
+    },
+    getCategoryCount() {
+      getCategoryCount().then(res => {
+        this.cardInfoData[3].count = res.categoryCount
       })
     }
   }

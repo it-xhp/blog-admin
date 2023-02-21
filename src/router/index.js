@@ -72,6 +72,7 @@ export const constantRoutes = [
 const routes = [...constantRoutes, ...asyncRoutes]
 
 export default new Router({
-  routes
+  routes,
+  mode: 'history'
 })
 

@@ -1,9 +1,10 @@
 <template>
   <div class="main-view">
     <transition name="fade" mode="out-in">
-      <keep-alive :include="cachedViews">
-        <router-view :key="key" />
-      </keep-alive>
+      <!--      不使用缓存-->
+      <!--      <keep-alive :include="cachedViews">-->
+      <router-view :key="key" />
+      <!--      </keep-alive>-->
     </transition>
   </div>
 </template>

@@ -40,6 +40,7 @@ import CountTo from 'vue-count-to'
 import ChartsPie from '@/components/Charts/ChartsPie'
 import ChartsBar from '@/components/Charts/ChartsBar'
 import ChartsLine from '@/components/Charts/ChartsLine'
+import { getPostCount } from '@/api/home'
 export default {
   name: 'Home',
   components: { CountTo, ChartsPie, ChartsBar, ChartsLine },
@@ -48,10 +49,10 @@ export default {
       text: '分类',
       title: '近七天用户访问量条形图',
       cardInfoData: [
-        { title: '访问量', icon: 'blog-liulanliang', count: 682, color: '#2d8cf0' },
-        { title: '文章', icon: 'blog-wenzhang', count: 259, color: '#19be6b' },
-        { title: '标签', icon: 'blog-biaoqian', count: 1262, color: '#ff9900' },
-        { title: '分类', icon: 'blog-fenlei', count: 508, color: '#e46cbb' }
+        { title: '访问量', icon: 'blog-liulanliang', count: 0, color: '#2d8cf0' },
+        { title: '文章', icon: 'blog-wenzhang', count: 0, color: '#19be6b' },
+        { title: '标签', icon: 'blog-biaoqian', count: 0, color: '#ff9900' },
+        { title: '分类', icon: 'blog-fenlei', count: 0, color: '#e46cbb' }
       ],
       chartsPieData: [
         { value: 1920, name: '直接访问' },
@@ -69,6 +70,18 @@ export default {
         Sat: 222,
         Sun: 1080
       }
+    }
+  },
+  created() {
+  },
+  mounted() {
+    this.getPostCount()
+  },
+  methods: {
+    getPostCount() {
+      getPostCount().then(res => {
+        this.cardInfoData[1].count = res.postCount
+      })
     }
   }
 }

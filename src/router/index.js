@@ -51,22 +51,22 @@ export const constantRoutes = [
         fixed: true
       }
     }]
-  },
-  {
-    path: '/',
-    name: 'Layout',
-    component: Layout,
-    redirect: '/systemSettings-center',
-    hidden: true,
-    children: [{
-      path: 'user-center',
-      name: 'UserCenter',
-      component: () => import('../views/UserCenter'),
-      meta: {
-        title: '个人中心'
-      }
-    }]
   }
+  // {
+  //   path: '/',
+  //   name: 'Layout',
+  //   component: Layout,
+  //   redirect: '/systemSettings-center',
+  //   hidden: true,
+  //   children: [{
+  //     path: 'user-center',
+  //     name: 'UserCenter',
+  //     component: () => import('../views/UserCenter'),
+  //     meta: {
+  //       title: '个人中心'
+  //     }
+  //   }]
+  // }
 ]
 
 const routes = [...constantRoutes, ...asyncRoutes]

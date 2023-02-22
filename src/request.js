@@ -1,18 +1,18 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
-import { getToken } from './utils/cookie'
+import storage from './utils/storage'
 import router from '@/router'
 // 创建axios实例
 const service = axios.create({
-  baseURL: '/api', // api 的 base_url
+  baseURL: '/api/', // api 的 base_url
   timeout: 120000 // 请求超时时间
 })
 
 // request拦截器设置
 service.interceptors.request.use(
   config => {
-    if (getToken()) {
-      config.headers['Authorization'] = 'Bearer ' + getToken() // 请求头设置自带 token
+    if (storage.getToken()) {
+      config.headers['token'] = storage.getToken() // 请求头设置自带 token
     }
     config.headers['Content-Type'] = 'application/json' // 请求的数据格式为 json
     return config

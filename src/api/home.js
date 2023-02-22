@@ -7,7 +7,7 @@ import request from '../request'
  */
 export function getPostCount() {
   return request({
-    url: '/posts/getPostCount',
+    url: '/sys/posts/getPostCount',
     method: 'get'
   })
 }
@@ -18,7 +18,7 @@ export function getPostCount() {
  */
 export function getTagCount() {
   return request({
-    url: '/tag/getTagCount',
+    url: '/sys/tag/getTagCount',
     method: 'get'
   })
 }

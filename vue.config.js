@@ -21,7 +21,7 @@ const VUE_APP_BASE_API = 'http://127.0.0.1:8088'
 const VUE_APP_WS_API = 'ws://42.194.194.178:3000'
 
 module.exports = {
-  publicPath: './', // 部署应用包时的基本 url
+  publicPath: '/', // 部署应用包时的基本 url
   outputDir: 'dist', // build 构建文件目录
   assetsDir: 'static', // 静态资源目录
   productionSourceMap: false, // 禁用生产环境的 source map

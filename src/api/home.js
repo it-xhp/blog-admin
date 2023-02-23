@@ -29,7 +29,7 @@ export function getTagCount() {
  */
 export function getCategoryCount() {
   return request({
-    url: '/categories/getCategoryCount',
+    url: '/sys/categories/getCategoryCount',
     method: 'get'
   })
 }

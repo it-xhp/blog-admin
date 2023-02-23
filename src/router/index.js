@@ -33,7 +33,7 @@ export const constantRoutes = [
       component: () => import('../views/Home'),
       meta: {
         title: '首页',
-        icon: 'vue-dsn-icon-index',
+        icon: 'blog-shouye',
         fixed: true
       }
     }]

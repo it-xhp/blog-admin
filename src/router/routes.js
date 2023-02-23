@@ -17,7 +17,7 @@ export const asyncRoutes = [
     redirect: '/form-table/table-classic',
     meta: {
       title: '文章管理',
-      icon: 'vue-dsn-icon-biaoge'
+      icon: 'blog-wenzhang'
     },
     children: [
       {
@@ -57,7 +57,7 @@ export const asyncRoutes = [
         component: () => import('../views/classify/classifyTable'),
         meta: {
           title: '分类目录',
-          icon: 'vue-dsn-icon-excel',
+          icon: 'blog-fenlei',
           fixed: true
         }
       }
@@ -74,7 +74,7 @@ export const asyncRoutes = [
         component: () => import('../views/tags/tagsTable'),
         meta: {
           title: '标签管理',
-          icon: 'vue-dsn-icon-excel',
+          icon: 'blog-biaoqian',
           fixed: true
         }
       }
@@ -91,7 +91,7 @@ export const asyncRoutes = [
         component: () => import('../views/attachment/attachment'),
         meta: {
           title: '附件',
-          icon: 'vue-dsn-icon-excel',
+          icon: 'blog-fujian',
           fixed: true
         }
       }
@@ -104,7 +104,7 @@ export const asyncRoutes = [
     redirect: '/logs/login-logs',
     meta: {
       title: '日志管理',
-      icon: 'vue-dsn-icon-video'
+      icon: 'blog-rizhi'
     },
     children: [
       {
@@ -132,7 +132,7 @@ export const asyncRoutes = [
     redirect: '/logs/login-logs',
     meta: {
       title: '系统设置',
-      icon: 'vue-dsn-icon-video'
+      icon: 'blog-xitongfuwu'
     },
     children: [
       {

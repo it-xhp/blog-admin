@@ -1,18 +1,11 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3901184 */
-  src: url('iconfont.eot?t=1676618737330'); /* IE9 */
-  src: url('iconfont.eot?t=1676618737330#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('iconfont.woff2?t=1676618737330') format('woff2'),
-       url('iconfont.woff?t=1676618737330') format('woff'),
-       url('iconfont.ttf?t=1676618737330') format('truetype'),
-       url('iconfont.svg?t=1676618737330#iconfont') format('svg');
-}
-[class^="blog"], [class*=" blog"] {
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  src: url('iconfont.eot?t=1677160091934'); /* IE9 */
+  src: url('iconfont.eot?t=1677160091934#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('iconfont.woff2?t=1677160091934') format('woff2'),
+       url('iconfont.woff?t=1677160091934') format('woff'),
+       url('iconfont.ttf?t=1677160091934') format('truetype'),
+       url('iconfont.svg?t=1677160091934#iconfont') format('svg');
 }
 
 .iconfont {
@@ -21,6 +14,46 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="blog"], [class*=" blog"] {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.blog-liebiao2:before {
+  content: "\e639";
+}
+
+.blog-index:before {
+  content: "\e640";
+}
+
+.blog-shouye:before {
+  content: "\e678";
+}
+
+.blog-rizhi:before {
+  content: "\e715";
+}
+
+.blog-fujian:before {
+  content: "\e62e";
+}
+
+.blog-fenlei1:before {
+  content: "\e605";
+}
+
+.blog-xitongfuwu:before {
+  content: "\e630";
+}
+
+.blog-biaoqian1:before {
+  content: "\e60d";
 }
 
 .blog-web:before {

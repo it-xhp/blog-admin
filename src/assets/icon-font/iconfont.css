@@ -17,7 +17,7 @@
 
 [class^="vue-dsn-icon"], [class*=" vue-dsn-icon"] {
   font-family: "iconfont" !important;
-  font-size: 16px;
+  font-size: 5px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -95,9 +95,7 @@
   content: "\e622";
 }
 
-.vue-dsn-icon-index:before {
-  content: "\e640";
-}
+
 
 .vue-dsn-icon-shuxing:before {
   content: "\e95e";

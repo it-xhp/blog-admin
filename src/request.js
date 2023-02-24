@@ -40,7 +40,11 @@ service.interceptors.response.use(
         router.push('/login')
       }
       // return Promise.reject('error')
-    } else {
+    } else if (code === 50011) {
+      if (router.app.$route.path !== '/login') {
+        router.push('/login')
+      }
+    }else {
       Message({
         type: 'error',
         message

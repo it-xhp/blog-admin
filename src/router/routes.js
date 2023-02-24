@@ -11,19 +11,19 @@ import Layout from '../layout'
 
 export const asyncRoutes = [
   {
-    path: '/form-table',
-    name: 'FormTable',
+    path: '/article-table',
+    name: 'articleTable',
     component: Layout,
-    redirect: '/form-table/table-classic',
+    redirect: '/article/table-classic',
     meta: {
       title: '文章管理',
       icon: 'blog-wenzhang'
     },
     children: [
       {
-        path: 'table-classic',
-        name: 'TableClassic',
-        component: () => import('../views/form-table/TableClassic'),
+        path: 'table-article',
+        name: 'TableArticle',
+        component: () => import('../views/article/TableClassic'),
         meta: {
           title: '所有文章'
         }
@@ -31,7 +31,7 @@ export const asyncRoutes = [
       {
         path: 'form-list',
         name: 'FormList',
-        component: () => import('../views/form-table/FormList'),
+        component: () => import('../views/article/FormList'),
         meta: {
           title: '写文章'
         }
@@ -39,7 +39,7 @@ export const asyncRoutes = [
       {
         path: 'table-inline-edit',
         name: 'TableInlineEdit',
-        component: () => import('../views/form-table/TableInlineEdit'),
+        component: () => import('../views/article/TableInlineEdit'),
         meta: {
           title: '行内编辑表格'
         }

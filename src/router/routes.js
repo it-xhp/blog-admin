@@ -11,10 +11,10 @@ import Layout from '../layout'
 
 export const asyncRoutes = [
   {
-    path: '/article-table',
+    path: '/article',
     name: 'articleTable',
     component: Layout,
-    redirect: '/article/table-classic',
+    redirect: '/article/table-article',
     meta: {
       title: '文章管理',
       icon: 'blog-wenzhang'
@@ -23,15 +23,15 @@ export const asyncRoutes = [
       {
         path: 'table-article',
         name: 'TableArticle',
-        component: () => import('../views/article/TableClassic'),
+        component: () => import('../views/article/ArticleTable'),
         meta: {
           title: '所有文章'
         }
       },
       {
-        path: 'form-list',
-        name: 'FormList',
-        component: () => import('../views/article/FormList'),
+        path: 'write-article',
+        name: 'WriteArticle',
+        component: () => import('../views/article/WriteArticle'),
         meta: {
           title: '写文章'
         }

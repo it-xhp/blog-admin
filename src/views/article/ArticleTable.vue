@@ -4,7 +4,7 @@
       <!-- 操作栏 -->
       <div class="control-btns">
         <el-button type="primary" @click="handleCreate">新建分类</el-button>
-        <el-button type="danger" v-if="this.multipleSelection.length >= 1" @click="batchDelete">批量删除</el-button>
+        <el-button v-if="this.multipleSelection.length >= 1" type="danger" @click="batchDelete">批量删除</el-button>
       </div>
       <!-- 查询栏 -->
       <el-form
@@ -15,10 +15,10 @@
         class="search-form"
       >
         <el-form-item label="文章名称" prop="id">
-          <el-input v-model="listQuery.id"  placeholder="请输入文章名称" />
+          <el-input v-model="listQuery.id" placeholder="请输入文章名称" />
         </el-form-item>
         <el-form-item label="分类" prop="married">
-          <el-select v-model="listQuery.married"  placeholder="请选择分类">
+          <el-select v-model="listQuery.married" placeholder="请选择分类">
             <el-option :value="0" label="单身" />
             <el-option :value="1" label="未婚" />
             <el-option :value="2" label="已婚" />
@@ -26,7 +26,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="标签" prop="phone">
-          <el-select v-model="listQuery.phone"  multiple collapse-tags placeholder="请选择标签" >
+          <el-select v-model="listQuery.phone" multiple collapse-tags placeholder="请选择标签">
             <el-option :value="0" label="单身" />
             <el-option :value="1" label="未婚" />
             <el-option :value="2" label="已婚" />
@@ -37,7 +37,7 @@
           <el-button type="primary" @click="onSubmit">查询</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button  @click="resetForm('listQuery')">重置</el-button>
+          <el-button @click="resetForm('listQuery')">重置</el-button>
         </el-form-item>
       </el-form>
       <!-- 表格栏 -->
@@ -69,8 +69,8 @@
           </template>
         </el-table-column>
 
-        <el-table-column prop="education" label="浏览量" align="center" sortable/>
-        <el-table-column prop="hobby" label="最后修改时间" align="center" width="300"  />
+        <el-table-column prop="education" label="浏览量" align="center" sortable />
+        <el-table-column prop="hobby" label="最后修改时间" align="center" width="300" />
         <el-table-column label="是否置顶" align="center">
           <template slot-scope="scope">
             <el-switch v-model="scope.row.forbid" @change="stateChange(scope.row)" />
@@ -140,11 +140,10 @@
 <script>
 import { getTableList } from '@/api'
 import Pagination from '@/components/Pagination'
-import Upload from '@/components/Upload'
 
 export default {
   name: 'Table',
-  components: { Pagination, Upload },
+  components: { Pagination },
   data() {
     return {
       // 数据列表加载动画
@@ -183,7 +182,7 @@ export default {
         ]
       },
       // 防止多次连续提交表单
-      isSubmit: false,
+      isSubmit: false
     }
   },
   created() {

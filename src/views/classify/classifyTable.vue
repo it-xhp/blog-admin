@@ -197,7 +197,7 @@ export default {
       this.dialogForm.name = row.name
       this.dialogForm.phone = row.phone
       this.dialogForm.married = row.married
-      this.dialogForm.hobby = row.hobby.split('、')
+      this.dialogForm.hobby = row.hobby
     },
     // 删除数据
     handleDelete(index, row) {

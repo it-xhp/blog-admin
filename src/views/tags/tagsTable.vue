@@ -4,8 +4,6 @@
       <!-- 操作栏 -->
       <div class="control-btns">
         <el-button type="primary" @click="handleCreate">新建数据</el-button>
-        <el-button type="primary" @click="handleImport">导入数据</el-button>
-        <el-button type="primary" @click="exportVisible = true">导出数据</el-button>
         <el-button type="danger" @click="batchDelete">批量删除</el-button>
       </div>
       <!-- 查询栏 -->
@@ -135,50 +133,18 @@
           </div>
         </el-form>
       </el-dialog>
-      <!-- 导入数据 弹出栏 -->
-      <el-dialog
-        title="导入数据"
-        :visible.sync="importVisible"
-        width="20%"
-      >
-        <div class="upload-box">
-          <span>选择文件：</span>
-          <Upload :files-format="filesFormat">
-            <i class="vue-dsn-icon-upload" />上传文件
-          </Upload>
-        </div>
-        <div class="hints">TIP：请选择要导出数据的格式。</div>
-        <span slot="footer">
-          <el-button @click="cancleImport">取 消</el-button>
-          <el-button type="primary" @click="confirmImport">确 定</el-button>
-        </span>
-      </el-dialog>
-      <!-- 导出数据 弹出栏 -->
-      <el-dialog
-        title="导出数据"
-        :visible.sync="exportVisible"
-        width="30%"
-      >
-        <div class="export-data">
-          <el-button type="primary" @click="exportTable('xlsx')">EXCEL格式</el-button>
-          <el-button type="primary" @click="exportTable('csv')">CSV格式</el-button>
-          <el-button type="primary" @click="exportTable('txt')">TXT格式</el-button>
-        </div>
-        <div class="hints">TIP：请选择要导出数据的格式。</div>
-      </el-dialog>
     </el-card>
   </div>
 </template>
 
 <script>
 import { getTableList } from '@/api'
-import excel from '@/utils/excel'
+
 import Pagination from '@/components/Pagination'
-import Upload from '@/components/Upload'
 
 export default {
   name: 'TagsTable',
-  components: { Pagination, Upload },
+  components: { Pagination },
   data() {
     return {
       // 数据列表加载动画
@@ -217,13 +183,7 @@ export default {
         ]
       },
       // 防止多次连续提交表单
-      isSubmit: false,
-      // 导入数据 弹出框显示/隐藏
-      importVisible: false,
-      // 导出文件格式
-      filesFormat: '.txt, .csv, .xls, .xlsx',
-      // 导出数据 弹出框显示/隐藏
-      exportVisible: false
+      isSubmit: false
     }
   },
   created() {
@@ -308,10 +268,6 @@ export default {
       this.listQuery.currentPage = 1
       this.fetchData()
     },
-    // 导入数据
-    handleImport() {
-      this.importVisible = true
-    },
     // 新增/编辑表单确认提交
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
@@ -329,31 +285,6 @@ export default {
     cancleForm() {
       this.$refs.dialogForm.resetFields()
       this.formVisible = false
-    },
-    // 导入数据弹出栏 确认操作
-    confirmImport() {
-      // 此处添加 后台接收的接口，将导入的数据传给后台处理
-      this.importVisible = false
-    },
-    // 导入数据弹出栏 取消操作
-    cancleImport() {
-      // 将导入的数据清空
-      this.importVisible = false
-    },
-    // 导出数据--excle格式
-    exportTable(type) {
-      if (this.tableData.length) {
-        const params = {
-          header: ['编号', '姓名', '性别', '手机', '学历', '婚姻状况', '禁止编辑', '爱好'],
-          key: ['id', 'name', 'sex', 'phone', 'education', 'married', 'forbid', 'hobby'],
-          data: this.tableData,
-          autoWidth: true,
-          fileName: '综合表格',
-          bookType: type
-        }
-        excel.exportDataToExcel(params)
-        this.exportVisible = false
-      }
     },
     // 列表中婚姻状况栏，状态值改变时，调用
     selectChange(row) {

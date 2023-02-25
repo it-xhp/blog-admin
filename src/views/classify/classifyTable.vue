@@ -34,8 +34,12 @@
         size="medium"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="60" />
-        <el-table-column prop="name" label="姓名" align="center">
+        <el-table-column prop="id" label="文章名称" align="center" width="120" />
+        <el-table-column label="类型" align="center">
+          <template slot-scope="scope">{{ scope.row.sex }}</template>
+        </el-table-column>
+        <el-table-column prop="phone" label="分类" align="center" />
+        <el-table-column prop="name" label="标签" align="center">
           <template slot-scope="scope">
             <el-popover trigger="hover" placement="top">
               <p>姓名: {{ scope.row.name }}</p>
@@ -47,27 +51,9 @@
             </el-popover>
           </template>
         </el-table-column>
-        <el-table-column label="性别" align="center">
-          <template slot-scope="scope">{{ scope.row.sex }}</template>
-        </el-table-column>
-        <el-table-column prop="phone" label="手机" align="center" />
-        <el-table-column prop="education" label="学历" align="center" />
-        <el-table-column label="婚姻状况" align="center" width="100">
-          <template slot-scope="scope">
-            <el-select v-model="scope.row.married" style="width: 80px" @change="selectChange(scope.row)">
-              <el-option :value="0" label="单身" />
-              <el-option :value="1" label="未婚" />
-              <el-option :value="2" label="已婚" />
-              <el-option :value="3" label="离异" />
-            </el-select>
-          </template>
-        </el-table-column>
-        <el-table-column label="禁止编辑" align="center">
-          <template slot-scope="scope">
-            <el-switch v-model="scope.row.forbid" @change="stateChange(scope.row)" />
-          </template>
-        </el-table-column>
-        <el-table-column prop="hobby" label="爱好" align="center" width="300" show-overflow-tooltip />
+
+        <el-table-column prop="hobby" label="最后修改时间" align="center" width="300" />
+
         <el-table-column label="操作" align="center" width="200">
           <template slot-scope="scope">
             <el-button size="mini" :disabled="scope.row.forbid" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>

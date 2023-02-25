@@ -35,14 +35,6 @@ export const asyncRoutes = [
         meta: {
           title: '写文章'
         }
-      },
-      {
-        path: 'table-inline-edit',
-        name: 'TableInlineEdit',
-        component: () => import('../views/article/TableInlineEdit'),
-        meta: {
-          title: '行内编辑表格'
-        }
       }
     ]
   },

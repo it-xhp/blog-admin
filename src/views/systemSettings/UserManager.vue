@@ -139,7 +139,6 @@
 
 <script>
 import { getTableList } from '@/api'
-
 import Pagination from '@/components/Pagination'
 
 export default {
@@ -209,7 +208,7 @@ export default {
       this.dialogForm.name = row.name
       this.dialogForm.phone = row.phone
       this.dialogForm.married = row.married
-      this.dialogForm.hobby = row.hobby
+      this.dialogForm.hobby = row.hobby.split('、')
     },
     // 删除数据
     handleDelete(index, row) {

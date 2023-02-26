@@ -14,23 +14,27 @@
         label-width="90px"
         class="search-form"
       >
-        <el-form-item label="文章名称" prop="id">
-          <el-input v-model="listQuery.id" placeholder="请输入文章名称" />
+        <el-form-item label="文章名称" prop="title">
+          <el-input v-model="listQuery.title" placeholder="请输入文章名称" />
         </el-form-item>
-        <el-form-item label="分类" prop="married">
-          <el-select v-model="listQuery.married" placeholder="请选择分类">
-            <el-option :value="0" label="单身" />
-            <el-option :value="1" label="未婚" />
-            <el-option :value="2" label="已婚" />
-            <el-option :value="3" label="离异" />
+        <el-form-item label="分类" prop="categoryId">
+          <el-select v-model="listQuery.categoryId" placeholder="请选择分类">
+            <el-option
+              v-for="item in classifySelection"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+            />
           </el-select>
         </el-form-item>
-        <el-form-item label="标签" prop="phone">
-          <el-select v-model="listQuery.phone" multiple collapse-tags placeholder="请选择标签">
-            <el-option :value="0" label="单身" />
-            <el-option :value="1" label="未婚" />
-            <el-option :value="2" label="已婚" />
-            <el-option :value="3" label="离异" />
+        <el-form-item label="标签" prop="tags">
+          <el-select v-model="listQuery.tags" multiple collapse-tags placeholder="请选择标签">
+            <el-option
+              v-for="item in tagsMultipleSelection"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+            />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -42,7 +46,6 @@
       </el-form>
       <!-- 表格栏 -->
       <el-table
-        ref="multipleTable"
         v-loading="listLoading"
         :data="tableData"
         tooltip-effect="dark"
@@ -50,7 +53,6 @@
         size="medium"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="60" />
         <el-table-column prop="id" label="文章名称" align="center" width="120" />
         <el-table-column label="类型" align="center">
           <template slot-scope="scope">{{ scope.row.sex }}</template>
@@ -140,6 +142,7 @@
 <script>
 import { getTableList } from '@/api'
 import Pagination from '@/components/Pagination'
+import ArticleTableApi from '@/api/ArticleTableApi'
 
 export default {
   name: 'Table',
@@ -150,9 +153,9 @@ export default {
       listLoading: true,
       // 查询列表参数对象
       listQuery: {
-        id: undefined,
-        phone: [],
-        married: undefined,
+        title: '',
+        tags: [],
+        categoryId: '',
         currentPage: 1,
         pageSize: 10
       },
@@ -167,6 +170,10 @@ export default {
       total: 0,
       // 表格数据数组
       tableData: [],
+      // 分类数据来源
+      classifySelection: [],
+      // 标签多选数据来源
+      tagsMultipleSelection: [],
       // 多选数据暂存数组
       multipleSelection: [],
       // 新增/编辑 弹出框显示/隐藏
@@ -187,6 +194,8 @@ export default {
   },
   created() {
     this.fetchData()
+    this.getCategories()
+    this.getTags()
   },
   methods: {
     // 多选操作
@@ -260,6 +269,20 @@ export default {
         }
       }).catch(() => {
         this.listLoading = false
+      })
+    },
+    // 从后端获取分类
+    getCategories() {
+      ArticleTableApi.getCategoriesList().then((res) => {
+        this.classifySelection = res.categoriesList
+        console.log(this.classifySelection)
+      })
+    },
+    // 获取从后端标签
+    getTags() {
+      ArticleTableApi.getTagList().then((res) => {
+        this.tagsMultipleSelection = res.tagList
+        console.log(this.tagsMultipleSelection)
       })
     },
     // 查询数据

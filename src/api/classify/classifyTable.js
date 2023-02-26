@@ -1,7 +1,7 @@
 import request from '@/request'
 
 export default {
-  loadTable(data) {
+  loadClassifyTable(data) {
     return request({
       url: '/sys/categories/loadTable',
       method: 'post',

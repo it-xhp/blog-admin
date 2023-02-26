@@ -227,7 +227,7 @@ export default {
       this.listLoading = true
       // 获取数据列表接口
       const data = JSON.stringify(this.listQuery)
-      classifyTable.loadTable(data).then(res => {
+      classifyTable.loadClassifyTable(data).then(res => {
         const data = res
         this.total = data.total
         this.tableData = data.categoriesList

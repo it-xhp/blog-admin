@@ -5,7 +5,7 @@ import Layout from '../layout'
  * meta : {
     title: 'title'               菜单名
     icon: 'icon-name'            图标名
-    fixed: true                  如果设置为 true，该项 tag 将一直存在 tag 栏中(默认为 false)
+    fixed: true                  如果设置为 true，该项 ArticleTableApi 将一直存在 ArticleTableApi 栏中(默认为 false)
   }
  * */
 

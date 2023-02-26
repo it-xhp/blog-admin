@@ -1,10 +1,6 @@
 <template>
   <div class="table-classic-wrapper">
     <el-card shadow="always">
-      <!-- 操作栏 -->
-      <div class="control-btns">
-        <el-button type="primary">新建数据</el-button>
-      </div>
       <!-- 查询栏 -->
       <el-form
         ref="listQuery"
@@ -13,8 +9,8 @@
         label-width="90px"
         class="search-form"
       >
-        <el-form-item label="分类名" prop="name">
-          <el-input v-model="listQuery.name" placeholder="分类名" />
+        <el-form-item label="关键词" prop="name">
+          <el-input v-model="listQuery.name" placeholder="" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
@@ -23,21 +19,33 @@
           <el-button @click="resetForm('listQuery')">重置</el-button>
         </el-form-item>
       </el-form>
-      <!-- 表格栏 -->
-      <div class="demo-image__placeholder">
-        <div class="block">
-          <span class="demonstration">默认</span>
-          <el-image :src="src" />
-        </div>
-        <div class="block">
-          <span class="demonstration">自定义</span>
-          <el-image :src="src">
-            <div slot="placeholder" class="image-slot">
-              加载中<span class="dot">...</span>
-            </div>
-          </el-image>
-        </div>
+      <!-- 操作栏 -->
+      <div class="control-btns">
+        <el-button type="primary" icon="blog-shangchuan">上传</el-button>
       </div>
+      <!-- 表格栏 -->
+      <el-row :gutter="12">
+        <el-col :span="24">
+          <div class="grid grid-cols-2 gap-x-2 gap-y-3 sm:grid-cols-3 md:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-10">
+            <div
+              v-for="(attachment, index) in list.data"
+              :key="index"
+            >
+              <div
+                style="display: flex;justify-content: start"
+                class="relative cursor-pointer overflow-hidden rounded-sm border-solid bg-white transition-all hover:shadow-sm"
+              >
+                <img
+                  style="width: 100px; height: 100px;margin: 0 5px"
+                  :src="attachment.thumbPath"
+                  :alt="attachment.name"
+                >
+              </div>
+            </div>
+          </div>
+
+        </el-col>
+      </el-row>
       <!-- 分页栏 -->
       <Pagination :total="total" :page.sync="listQuery.currentPage" :limit.sync="listQuery.pageSize" @pagination="fetchData" />
     </el-card>
@@ -60,6 +68,18 @@ export default {
         currentPage: 1,
         pageSize: 10
       },
+      list: {
+        data: [
+          {
+            thumbPath: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+            name: '111'
+          },
+          {
+            thumbPath: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+            name: '111'
+          }
+        ]
+      },
       // 数据总条数
       total: 0,
       // 表格数据数组
@@ -68,7 +88,9 @@ export default {
       multipleSelection: [],
       // 新增/编辑 弹出框显示/隐藏
       formVisible: false,
-      src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
+      src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+      fits: ['fill', 'contain', 'cover', 'none', 'scale-down', 'fill1', 'contain1', 'cover1', 'none1', 'scale-down1'],
+      url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
     }
   },
   created() {
@@ -154,5 +176,9 @@ export default {
     color: #aaa;
     text-align: center;
   }
+}
+.image{
+  display: flex;
+  justify-content: space-around;
 }
 </style>

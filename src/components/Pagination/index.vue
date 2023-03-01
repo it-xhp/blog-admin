@@ -59,12 +59,13 @@ export default {
         return this.limit
       },
       set(val) {
-        this.emit('update:limit', val)
+        // this.emit('update:limit', val)
       }
     }
   },
   methods: {
     handleSizeChange(val) {
+      // console.log(val)
       this.$emit('pagination', { page: this.currentPage, limit: val })
     },
     handleCurrentChange(val) {

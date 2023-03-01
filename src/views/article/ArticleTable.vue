@@ -27,16 +27,6 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="标签" prop="tags">
-          <el-select v-model="listQuery.tags" multiple collapse-tags placeholder="请选择标签">
-            <el-option
-              v-for="item in tagsMultipleSelection"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
-            />
-          </el-select>
-        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
         </el-form-item>
@@ -53,29 +43,23 @@
         size="medium"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column prop="id" label="文章名称" align="center" width="120" />
+        <el-table-column prop="title" label="文章名称" align="center" width="120" />
+        <el-table-column prop="status" label="状态" align="center" width="120" />
         <el-table-column label="类型" align="center">
-          <template slot-scope="scope">{{ scope.row.sex }}</template>
+          <template slot-scope="scope">{{ scope.row.type }}</template>
         </el-table-column>
-        <el-table-column prop="phone" label="分类" align="center" />
-        <el-table-column prop="name" label="标签" align="center">
-          <template slot-scope="scope">
-            <el-popover trigger="hover" placement="top">
-              <p>姓名: {{ scope.row.name }}</p>
-              <p>手机: {{ scope.row.phone }}</p>
-              <p>爱好: {{ scope.row.hobby }}</p>
-              <div slot="reference">
-                <el-tag size="medium">{{ scope.row.name }}</el-tag>
-              </div>
-            </el-popover>
+        <el-table-column prop="categories" label="分类" align="center" />
+        <el-table-column label="标签" align="center" width="300">
+          <template slot-scope="scope" style="display: flex;justify-content: space-evenly;">
+            <el-tag v-for="item in scope.row.tags" :key="item.id" type="" :color="item.color" disable-transitions>{{ item.name }}</el-tag>
           </template>
         </el-table-column>
 
-        <el-table-column prop="education" label="浏览量" align="center" sortable />
-        <el-table-column prop="hobby" label="最后修改时间" align="center" width="300" />
+        <el-table-column prop="visited" label="浏览量" align="center" sortable />
+        <el-table-column prop="createTime" label="创建时间" :formatter="createTimeFilter" align="center" width="300" />
         <el-table-column label="是否置顶" align="center">
           <template slot-scope="scope">
-            <el-switch v-model="scope.row.forbid" @change="stateChange(scope.row)" />
+            <el-switch v-model="scope.row.isStick" @change="stateChange(scope.row)" />
           </template>
         </el-table-column>
 
@@ -87,7 +71,7 @@
         </el-table-column>
       </el-table>
       <!-- 分页栏 -->
-      <Pagination :total="total" :page.sync="listQuery.currentPage" :limit.sync="listQuery.pageSize" @pagination="fetchData" />
+      <Pagination :total="total" :page.sync="listQuery.currentPage" :limit.sync="listQuery.pageSize" @pagination="paginationQuery" />
       <!-- 新增/编辑 弹出栏 -->
       <el-dialog
         title="编辑"
@@ -140,9 +124,9 @@
 </template>
 
 <script>
-import { getTableList } from '@/api'
 import Pagination from '@/components/Pagination'
 import ArticleTableApi from '@/api/ArticleTableApi'
+import { dateFormat } from '@/utils/dateUtil'
 
 export default {
   name: 'Table',
@@ -153,9 +137,8 @@ export default {
       listLoading: true,
       // 查询列表参数对象
       listQuery: {
-        title: '',
-        tags: [],
-        categoryId: '',
+        title: undefined,
+        categoryId: undefined,
         currentPage: 1,
         pageSize: 10
       },
@@ -172,8 +155,6 @@ export default {
       tableData: [],
       // 分类数据来源
       classifySelection: [],
-      // 标签多选数据来源
-      tagsMultipleSelection: [],
       // 多选数据暂存数组
       multipleSelection: [],
       // 新增/编辑 弹出框显示/隐藏
@@ -195,9 +176,14 @@ export default {
   created() {
     this.fetchData()
     this.getCategories()
-    this.getTags()
+    this.getTableList()
   },
   methods: {
+    paginationQuery(data) {
+      this.listQuery.currentPage = data.page
+      this.listQuery.pageSize = data.limit
+      this.fetchData()
+    },
     // 多选操作
     handleSelectionChange(val) {
       this.multipleSelection = val
@@ -260,16 +246,7 @@ export default {
     fetchData() {
       this.listLoading = true
       // 获取数据列表接口
-      getTableList(this.listQuery).then(res => {
-        const data = res.data
-        if (data.code === 0) {
-          this.total = data.data.total
-          this.tableData = data.data.list
-          this.listLoading = false
-        }
-      }).catch(() => {
-        this.listLoading = false
-      })
+      this.getTableList()
     },
     // 从后端获取分类
     getCategories() {
@@ -278,12 +255,20 @@ export default {
         console.log(this.classifySelection)
       })
     },
-    // 获取从后端标签
-    getTags() {
-      ArticleTableApi.getTagList().then((res) => {
-        this.tagsMultipleSelection = res.tagList
-        console.log(this.tagsMultipleSelection)
+    // 获取文章列表
+    getTableList() {
+      const data = JSON.stringify(this.listQuery)
+      ArticleTableApi.loadTable(data).then(res => {
+        this.tableData = res.data
+        this.total = res.totalCount
+        this.listLoading = false
       })
+    },
+    createTimeFilter(row, column, cellValue, index) {
+      const date = row[column.property]
+      if (date != null) {
+        return dateFormat(date)
+      }
     },
     // 查询数据
     onSubmit() {
@@ -318,6 +303,9 @@ export default {
     // 列表中禁止编辑栏，状态值改变时，调用
     stateChange(row) {
       // 此处添加后台接口，成功后调用fetchData方法更新列表
+      ArticleTableApi.stickStateChange(row.id).then(res => {
+        this.fetchData()
+      })
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="table-classic-wrapper">
+  <div class="attachment-table-classic-wrapper">
     <el-card shadow="always">
       <!-- 查询栏 -->
       <el-form
@@ -133,7 +133,7 @@ export default {
   border: solid black 1px;
   background-color: #CCCCCC;
 }
-.table-classic-wrapper {
+.attachment-table-classic-wrapper {
   .el-card {
     min-height: 656px;
   }

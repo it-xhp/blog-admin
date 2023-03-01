@@ -1,5 +1,5 @@
 <template>
-  <div class="table-classic-wrapper">
+  <div class="operation-logs-table-classic-wrapper">
     <el-card shadow="always">
       <!-- 操作栏 -->
       <div class="control-btns">
@@ -299,7 +299,7 @@ export default {
 </script>
 
 <style lang="less">
-.table-classic-wrapper {
+.operation-logs-table-classic-wrapper {
   .el-card {
     min-height: 656px;
   }
